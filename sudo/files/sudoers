@@ -1,0 +1,14 @@
+# /etc/sudoers
+#
+# This file MUST be edited with the 'visudo' command as root.
+#
+# See the man page for details on how to write a sudoers file.
+#
+#
+
+Defaults        env_reset
+
+root    ALL=(ALL) ALL
+
+# sudo group
+%sudo ALL=(ALL) NOPASSWD: ALL

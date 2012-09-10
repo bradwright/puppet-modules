@@ -1,0 +1,11 @@
+#!/bin/sh
+
+<%- emacs_file = "emacs-#{version}" -%>
+cd /tmp
+wget "http://www.mirrorservice.org/sites/ftp.gnu.org/gnu/emacs/<%= emacs_file %>.tar.gz"
+tar zxf <%= emacs_file %>.tar.gz
+cd <%= emacs_file %>
+./configure --prefix=/usr/local --without-x
+make
+sudo make install
+rm -rf <%= emacs_file %> <%= emacs_file %>.tar.gz

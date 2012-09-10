@@ -1,0 +1,17 @@
+#!/bin/sh
+
+<% git_file = "v#{version}" %>
+cd /tmp
+wget https://github.com/git/git/tarball/<%= git_file %>
+
+<%# this is because a combination of GitHub and tar will create an
+    unpredictable filename like "git-git-sha8" %>
+TAR_DIR=`tar zft <%= git_file %> | head -n1`
+
+tar zxf <%= git_file %>
+cd $TAR_DIR
+make configure
+./configure --prefix=/usr/local
+make all man
+sudo make install install-man
+rm -rf <%= git_file %> $TAR_DIR

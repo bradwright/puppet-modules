@@ -1,0 +1,14 @@
+#!/bin/sh
+
+<%- tmux_file = "tmux-#{version}" -%>
+
+TS=`date "+%s"`
+TO_DOWNLOAD="http://downloads.sourceforge.net/project/tmux/tmux/<%= tmux_file %>/<%= tmux_file %>.tar.gz?r=http%3A%2F%2Ftmux.sourceforge.net%2F&ts=${TS}&use_mirror=heanet"
+
+cd /tmp
+wget $TO_DOWNLOAD -O <%= tmux_file %>.tar.gz
+tar zxf <%= tmux_file %>.tar.gz
+cd <%= tmux_file %>
+./configure --prefix=/usr/local
+make
+sudo make install

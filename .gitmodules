@@ -4,3 +4,6 @@
 [submodule "brew"]
 	path = brew
 	url = https://github.com/kelseyhightower/puppet-homebrew
+[submodule "osx_defaults"]
+	path = osx_defaults
+	url = https://github.com/bradleywright/puppet-osx_defaults.git

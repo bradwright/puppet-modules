@@ -2,16 +2,22 @@
 # the case where it needs to install from source vs. package
 # management.
 class emacs($version='24.2') {
-
-  case $::lsbdistcodename {
-    'precise': {
-      class { 'emacs::package':
-        version => $version
-      }
+  if $::kernel == 'Darwin' {
+    class { 'emacs::homebrew':
+      version => $version
     }
-    default: {
-      class { 'emacs::src':
-        version => $version
+  }
+  else {
+    case $::lsbdistcodename {
+      'precise': {
+        class { 'emacs::package':
+          version => $version
+        }
+      }
+      default: {
+        class { 'emacs::src':
+          version => $version
+        }
       }
     }
   }

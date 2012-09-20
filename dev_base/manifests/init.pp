@@ -38,9 +38,17 @@ class dev_base(
   git::clone { 'git dotfiles':
     repo        => "https://github.com/bradleywright/dotfiles.git",
     destination => "/home/${default_user}/src/dotfiles",
-    before      => Exec[ 'make dotfiles' ],
     user        => $default_user,
+    before      => Exec[ 'emacs.d fetch' ],
     require     => Class[ 'git-core' ]
+  }
+
+  exec { 'emacs.d fetch':
+    cwd      => "/home/${default_user}/src/dotfiles",
+    command  => "/bin/su -c 'git submodule update --init' ${default_user}",
+    creates  => "/home/${default_user}/src/dotfiles/emacs.d/Makefile",
+    provider => shell,
+    before   => Exec[ 'make dotfiles' ],
   }
 
   exec { 'make dotfiles':

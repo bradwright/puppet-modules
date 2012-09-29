@@ -12,7 +12,8 @@ class dev_base(
      'bash-completion',
      'curl',
      'zsh',
-     'zsh-doc'
+     'zsh-doc',
+     'zsh-lovers',
      ]:
     ensure => installed
   }

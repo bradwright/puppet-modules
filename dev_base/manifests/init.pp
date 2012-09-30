@@ -24,9 +24,7 @@ class dev_base(
     version => "24.2"
   }
 
-  class { 'tmux':
-    version => "1.6"
-  }
+  include tmux
 
   file { 'home src':
     ensure  => directory,

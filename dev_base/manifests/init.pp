@@ -38,16 +38,17 @@ class dev_base(
     repo        => "https://github.com/bradleywright/dotfiles.git",
     destination => "/home/${default_user}/src/dotfiles",
     user        => $default_user,
-    before      => Exec[ 'emacs.d fetch' ],
+    before      => Exec[ 'make dotfiles' ],
     require     => Class[ 'git-core' ]
   }
 
-  exec { 'emacs.d fetch':
-    cwd      => "/home/${default_user}/src/dotfiles",
-    command  => "/bin/su -c 'git submodule update --init' ${default_user}",
-    creates  => "/home/${default_user}/src/dotfiles/emacs.d/Makefile",
-    provider => shell,
-    before   => Exec[ 'make dotfiles' ],
+  # check out my dotfiles repo as the logged in user
+  git::clone { 'git emacs.d':
+    repo        => "https://github.com/bradleywright/emacs-d.git",
+    destination => "/home/${default_user}/src/emacs-d",
+    user        => $default_user,
+    before      => Exec[ 'make emacs.d' ],
+    require     => Class[ 'git-core' ]
   }
 
   exec { 'make dotfiles':
@@ -56,6 +57,15 @@ class dev_base(
     # user, even with the :user param.
     command  => "/bin/su -c 'TARGET=/home/${default_user}/ make' ${default_user}",
     creates  => "/home/${default_user}/.ackrc",
+    provider => shell,
+  }
+
+  exec { 'make emacs.d':
+    cwd      => "/home/${default_user}/src/emacs-d",
+    # This is a dirty hack because you can't actually log in as the
+    # user, even with the :user param.
+    command  => "/bin/su -c 'make' ${default_user}",
+    creates  => "/home/${default_user}/.emacs.d/init.el",
     provider => shell,
   }
 

@@ -17,7 +17,7 @@ class tmux {
       }
       default: {
         class { 'tmux::src':
-          version => '1.6.1',
+          version => '1.6',
         }
       }
     }

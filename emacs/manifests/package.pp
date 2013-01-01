@@ -2,7 +2,13 @@
 class emacs::package($version) {
   include apt
 
-  apt::ppa { "ppa:cassou/emacs": }
+  exec { 'emacs-apt-update':
+    command => 'apt-get update'
+  }
+
+  apt::ppa { "ppa:cassou/emacs":
+    require => Exec['emacs-apt-update']
+  }
 
   package { 'emacs24':
     ensure  => installed,

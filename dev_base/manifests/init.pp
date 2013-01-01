@@ -2,10 +2,6 @@ class dev_base(
   $source_list = true,
   $default_user = 'vagrant') {
 
-  class { 'apt':
-    source_list => $source_list
-  }
-
   package {
     [
      'build-essential',

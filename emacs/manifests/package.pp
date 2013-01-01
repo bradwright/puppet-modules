@@ -1,14 +1,12 @@
 # Installs Emacs from the cassou/emacs PPA.
 class emacs::package($version) {
-  apt::repository { 'emacs-cassou':
-    type  => 'ppa',
-    owner => 'cassou',
-    repo  => 'emacs',
-  }
+  include apt
+
+  apt::ppa { "ppa:cassou/emacs": }
 
   package { 'emacs24':
     ensure  => installed,
-    require => Apt::Repository['emacs-cassou'],
+    require => Apt::Ppa['ppa:cassou/emacs'],
   }
 
   package { 'emacs':

@@ -1,6 +1,3 @@
-[submodule "git"]
-	path = git
-	url = https://github.com/armstrong/puppet-git.git
 [submodule "osx_defaults"]
 	path = osx_defaults
 	url = https://github.com/bradleywright/puppet-osx_defaults.git

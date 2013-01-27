@@ -2,13 +2,7 @@
 class git-core {
   include apt
 
-  exec { 'git-apt-update':
-    command => 'apt-get update'
-  }
-
-  apt::ppa { "ppa:git-core/ppa":
-    require => Exec['git-apt-update']
-  }
+  apt::ppa { "ppa:git-core/ppa": }
 
   package { 'git':
     ensure  => latest,

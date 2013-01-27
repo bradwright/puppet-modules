@@ -11,7 +11,7 @@ class git-core {
   }
 
   package { 'git':
-    ensure  => installed,
+    ensure  => latest,
     require => Apt::Ppa['ppa:git-core/ppa']
   }
 

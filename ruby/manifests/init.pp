@@ -7,11 +7,8 @@ class ruby {
       # http://wiki.brightbox.co.uk/docs:ruby-ng
 
       # Note that ruby1.9.3 is part of Precise now.
-      apt::repository { 'brightbox-ruby-ng':
-        type  => 'ppa',
-        owner => 'brightbox',
-        repo  => 'ruby-ng',
-        before => Package[ 'ruby1.9.3' ]
+      apt::ppa { 'ppa:brightbox/ruby-ng':
+        before => Package['ruby1.9.3'],
       }
     }
     default: {}

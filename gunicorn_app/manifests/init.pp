@@ -29,6 +29,7 @@ class gunicorn_app(
     content => template('gunicorn_app/gunicorn.py.conf'),
     owner   => root,
     group   => root,
+    notify  => Service["${name}_gunicorn"],
     require => [File['/etc/gunicorn'], File['/var/run/gunicorn']]
   }
 
@@ -38,6 +39,7 @@ class gunicorn_app(
     content => template('gunicorn_app/upstart.conf.erb'),
     owner   => root,
     group   => root,
+    notify  => Service["${name}_gunicorn"],
     require => File["${name}.gunicorn.py"],
   }
 

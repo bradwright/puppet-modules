@@ -25,7 +25,7 @@ class gunicorn_app(
     owner   => root,
     group   => root,
     notify  => Service["${name}_gunicorn"],
-    require => [File['/etc/gunicorn'], File['/var/run/gunicorn']]
+    require => File['/etc/gunicorn']
   }
 
   file {"${name}.upstart.conf":

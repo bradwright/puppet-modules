@@ -11,11 +11,6 @@ class gunicorn_app(
   $gunicorn_bin='gunicorn'
   ) {
 
-  file { '/var/run/gunicorn':
-    ensure => directory,
-    owner  => 'www-data',
-  }
-
   file { '/etc/gunicorn':
     ensure => directory,
     owner  => root,

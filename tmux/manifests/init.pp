@@ -11,8 +11,8 @@ class tmux {
   else {
     case $::lsbdistcodename {
       'precise': {
-        package { 'tmux':
-          ensure => latest,
+        class { 'tmux::src':
+          version => '1.8',
         }
       }
       default: {

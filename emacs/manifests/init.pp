@@ -1,7 +1,7 @@
 # Installs the passed in version (normally latest) of Emacs. Handles
 # the case where it needs to install from source vs. package
 # management.
-class emacs($version='24.2') {
+class emacs($version='24.3') {
   if $::kernel == 'Darwin' {
     class { 'emacs::homebrew':
       version => $version

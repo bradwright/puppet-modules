@@ -2,7 +2,7 @@
 # See the install.sh.erb template for most of the download/unpacking
 # logic.
 class tmux::src($version) {
-  package { 'libevent-dev':
+  package { ['libevent-dev', 'libncurses5-dev']:
     ensure => installed,
     before => Exec['install tmux']
   }

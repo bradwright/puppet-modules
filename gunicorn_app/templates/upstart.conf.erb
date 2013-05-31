@@ -5,6 +5,11 @@ stop on runlevel [!2345]
 
 respawn
 
-exec sudo mkdir -p /var/run/gunicorn
-exec sudo chown www-data:www-data /var/run/gunicorn
-exec sudo -u www-data <%= gunicorn_bin %> -c <%= config_path %> <%= settings_path %>
+pre-start script
+    mkdir -p /var/run/gunicorn
+    chown www-data:www-data /var/run/gunicorn
+end script
+
+script
+    exec sudo -u www-data <%= gunicorn_bin %> -c <%= config_path %> <%= settings_path %>
+end script
